@@ -10,6 +10,7 @@ public class AlafaVertx extends AbstractVerticle {
 	@Override
 	public void start(Future<Void> fut) {
 		System.out.println("Main verticle has started, let's deploy some others...");
+		
 
 		// Deploy another instance and want for it to start
 		vertx.deployVerticle("io.vertx.qp.example.BetaVertx", res -> {
@@ -40,7 +41,8 @@ public class AlafaVertx extends AbstractVerticle {
 		vertx.setPeriodic(1000, v -> {
 			eb.send("ping-address", "ping!", reply -> {
 				if (reply.succeeded()) {
-					System.out.println(myID + "Received reply " + reply.result().body());
+					System.out.println(myID + "Received reply " + reply.result().body() + "thread:"
+							+ Thread.currentThread().getName());
 				} else {
 					System.out.println("No reply");
 				}
@@ -52,22 +54,21 @@ public class AlafaVertx extends AbstractVerticle {
 		vertx.deployVerticle("io.vertx.qp.example.BetaVertx", new DeploymentOptions().setConfig(config));
 
 		// Deploy 10 instances
-		//vertx.deployVerticle("io.vertx.qp.example.BetaVertx", new DeploymentOptions().setInstances(10));
+		// vertx.deployVerticle("io.vertx.qp.example.BetaVertx", new
+		// DeploymentOptions().setInstances(10));
 
 		// Deploy it as a worker verticle
-		//vertx.deployVerticle("io.vertx.qp.example.BetaVertx", new DeploymentOptions().setWorker(true));
+		// vertx.deployVerticle("io.vertx.qp.example.BetaVertx", new
+		// DeploymentOptions().setWorker(true));
 
 		// Deploy it as a worker verticle
 		/*
-		vertx.deployVerticle("io.vertx.example.core.verticle.deploy.OtherVerticle",
-				new DeploymentOptions().setWorker(true), res -> {
-					if (res.succeeded()) {
-						System.out.println("can't happend.");
-					} else {
-						res.cause().printStackTrace();
-					}
-				});
-		*/
+		 * vertx.deployVerticle(
+		 * "io.vertx.example.core.verticle.deploy.OtherVerticle", new
+		 * DeploymentOptions().setWorker(true), res -> { if (res.succeeded()) {
+		 * System.out.println("can't happend."); } else {
+		 * res.cause().printStackTrace(); } });
+		 */
 
 	}
 }

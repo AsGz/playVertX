@@ -10,18 +10,19 @@ public class BetaVertx extends AbstractVerticle {
 
 		// The start method will be called when the verticle is deployed
 
-		System.out.println("Beta Verticle start...");
+		System.out.println("Beta Verticle start..."+ " thread:" + Thread.currentThread().getName());
 
 		System.out.println("Config is " + config());
 
 		String myID = vertx.getOrCreateContext().deploymentID();
 		EventBus eb = vertx.eventBus();
 		eb.consumer("ping-address", message -> {
-			System.out.println(myID + "Received message: " + message.body());
+			System.out.println(
+					myID + "Received message: " + message.body() + " thread:" + Thread.currentThread().getName());
 			// Now send back reply
 			message.reply("pong!");
 		});
-		System.out.println("Receiver ready!");
+		System.out.println("Receiver ready!"); 
 	}
 
 	@Override
