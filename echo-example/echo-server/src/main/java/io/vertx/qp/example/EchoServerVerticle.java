@@ -10,13 +10,7 @@ import io.vertx.core.streams.Pump;
 public class EchoServerVerticle extends AbstractVerticle {
 
 	public static void main(String[] args) {
-		//deploy in cluster mode
-		VertxOptions options = new VertxOptions();
-		options.setClustered(true);
 		
-		Vertx.clusteredVertx(options, res ->{
-			
-		});
 	}
 
 	@Override
