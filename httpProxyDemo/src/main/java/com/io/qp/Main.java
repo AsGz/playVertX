@@ -15,7 +15,7 @@ public class Main {
         Vertx vertx = Vertx.vertx(vo);
         //worker pool size
         DeploymentOptions options = new DeploymentOptions().setInstances(20);
-        vertx.deployVerticle(HTTPProxy.class.getName(), options, e -> {
+        vertx.deployVerticle(MyHttpProxy.class.getName(), options, e -> {
             System.out.println("start " + e.succeeded() + "," + e.cause());
         });
     }
