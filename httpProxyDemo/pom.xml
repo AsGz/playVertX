@@ -10,20 +10,21 @@
 
     <properties>
         <my.vertx.version>3.4.0</my.vertx.version>
+        <pagehelper.version>4.1.6</pagehelper.version>
     </properties>
 
     <dependencies>
-    <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-core</artifactId>
-        <version>${my.vertx.version}</version>
-    </dependency>
-
-    <dependency>
-        <groupId>io.vertx</groupId>
-        <artifactId>vertx-web</artifactId>
-        <version>${my.vertx.version}</version>
-    </dependency>
+	    <dependency>
+	        <groupId>io.vertx</groupId>
+	        <artifactId>vertx-core</artifactId>
+	        <version>${my.vertx.version}</version>
+	    </dependency>
+	
+	    <dependency>
+	        <groupId>io.vertx</groupId>
+	        <artifactId>vertx-web</artifactId>
+	        <version>${my.vertx.version}</version>
+	    </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
@@ -34,6 +35,17 @@
             <artifactId>vertx-core</artifactId>
             <version>3.4.0</version>
         </dependency>
+        <!-- mybatis分页自动生成插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper.version}</version>
+		</dependency>
+		<dependency>  
+             <groupId>org.mybatis</groupId>  
+             <artifactId>mybatis</artifactId>  
+             <version>3.4.4</version>  
+         </dependency>  
     </dependencies>
 
     <build>
@@ -46,6 +58,44 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            
+            <!-- mvn clean mybatis-generator:generate -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <configuration>
+                	<!--文件路径-->
+                	<configurationFile>src\main\resources\generatorConfig.xml</configurationFile>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+                <dependencies>  
+		            <dependency>  
+		                <groupId>mysql</groupId>  
+		                <artifactId>mysql-connector-java</artifactId>  
+		                 <!-- 引用依赖库的版本 -->
+		                <version>5.1.6</version>  
+		            </dependency>  
+		            <dependency>  
+		                <groupId>org.mybatis.generator</groupId>  
+		                <artifactId>mybatis-generator-core</artifactId>  
+		                <version>1.3.5</version>  
+		            </dependency>  
+		            <!-- mybatis分页自动生成插件 -->
+					<dependency>
+						<groupId>com.github.pagehelper</groupId>
+						<artifactId>pagehelper</artifactId>
+						<version>${pagehelper.version}</version>
+					</dependency>
+		            <dependency>  
+		                <groupId>org.mybatis</groupId>  
+		                <artifactId>mybatis</artifactId>  
+		                <!-- 引用依赖库的版本 -->
+		                <version>3.4.4</version>  
+		            </dependency>  
+		        </dependencies>  
             </plugin>
 
             <!-- 用于打包 fat jar -->

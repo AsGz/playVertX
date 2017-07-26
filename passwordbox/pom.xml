@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 项目资源信息 -->
+	<groupId>io.vertx.qp</groupId>
+	<artifactId>passwordbox</artifactId>
+	<version>3.4.0</version>
+
+	<!-- 依赖 vertx core -->
+	<dependencies>
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- cluster manager依赖 -->
+		 <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-hazelcast</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+	</dependencies>
+
+    <!-- parent必须指定格式-->
+    <packaging>pom</packaging>
+    <!-- 对应的子模块\项目 -->
+    <modules>
+        <module>passwordbox-server</module>
+        <module>passwordbox-client</module>
+    </modules>
+
+	<build>
+		<plugins>
+			<!-- java环境 -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+
