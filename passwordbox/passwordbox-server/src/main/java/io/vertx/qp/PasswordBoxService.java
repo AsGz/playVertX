@@ -24,6 +24,7 @@ public class PasswordBoxService extends AbstractVerticle {
 		NetworkConfig network = config.getNetworkConfig();
 		JoinConfig join = network.getJoin();
 		join.getTcpIpConfig().addMember( "10.81.15.87" ).addMember( "10.60.215.40" ).setEnabled( true );
+		join.getMulticastConfig().setEnabled(false);
 		HazelcastInstance h = Hazelcast.newHazelcastInstance(config);
 		ConcurrentMap<String, String> map = h.getMap("my-distributed-map");
 
